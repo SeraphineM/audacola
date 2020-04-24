@@ -2,7 +2,7 @@
 #'
 #' @param website The target website with the links to the desired content.
 #'
-#' @param start_webpage The main webpage of the case of interest.
+#' @param start_website The main webpage of the case of interest.
 #'
 #' @param page_ex The page counter in the link of the main website which - most likely - refers to the links with content on several pages.
 #' Typically an expression such as "page/30" at the end of the link.
@@ -17,9 +17,7 @@
 #'
 #' @import RSelenium
 #' @import rvest
-#' @import httr
-#' @import RCurl
-#' @import XML
+#' @importFrom xml2 read_html xml_attrs
 #' @import stringr
 #' @import dplyr
 #'
@@ -51,13 +49,11 @@ for (i in 1:n){
 # another loop to save in a list all links to speeches contained in the already scraped page_sources
 link <- list()
 all_links <- list()
-filter <- list()
-filtered <- list()
 
 for (i in 1:length(page_source)){
   #parse it to get links
-  link[[i]] <- read_html(page_source[[i]]) %>% html_nodes(xpath = links_xpath) # links are typically stored in this node path
-  link[[i]] <- bind_rows(lapply(xml_attrs(link[[i]]), function(x) data.frame(as.list(x), stringsAsFactors=FALSE)))
+  link[[i]] <- xml2::read_html(page_source[[i]]) %>% rvest::html_nodes(xpath = links_xpath) # links are typically stored in this node path
+  link[[i]] <- bind_rows(lapply(xml2::xml_attrs(link[[i]]), function(x) data.frame(as.list(x), stringsAsFactors=FALSE)))
   all_links[[i]] <- link[[i]]$href
 }
 
@@ -80,12 +76,7 @@ return(all_links)
 #' @return A folder with all htmls scraped from the target website.
 #'
 #' @import RSelenium
-#' @import rvest
-#' @import httr
-#' @import RCurl
-#' @import XML
 #' @import stringr
-#' @import dplyr
 #'
 #' @export
 #'

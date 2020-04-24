@@ -7,9 +7,7 @@ Maintainer: The package maintainer <seraphine.maerz@v-dem.net>
 Description: This package provides several function which help to automatically collect and analyze (textual) data from the Internet. 
 Imports: 
   rvest,
-  httr,
-  RCurl,
-  XML,
+  xml2,
   stringr,
   dplyr,
   RSelenium

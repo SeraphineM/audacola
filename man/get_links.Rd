@@ -9,6 +9,8 @@ get_links(website, start_website, page_ex, links_xpath, case, n)
 \arguments{
 \item{website}{The target website with the links to the desired content.}
 
+\item{start_website}{The main webpage of the case of interest.}
+
 \item{page_ex}{The page counter in the link of the main website which - most likely - refers to the links with content on several pages.
 Typically an expression such as "page/30" at the end of the link.}
 
@@ -17,8 +19,6 @@ Typically an expression such as "page/30" at the end of the link.}
 \item{case}{The name of the case, e.g. a country, make it a unique case identifier.}
 
 \item{n}{The number of pages on the target website which contains the links of interest.}
-
-\item{start_webpage}{The main webpage of the case of interest.}
 }
 \value{
 A character vector with all links ("all_links)
