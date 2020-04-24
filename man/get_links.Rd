@@ -2,9 +2,9 @@
 % Please edit documentation in R/get_links_content.R
 \name{get_links}
 \alias{get_links}
-\title{A function to \emph{automatically collect specific links on a website, e.g. to public speeches on official websites}.}
+\title{Automatically collect specific links provided on a website.}
 \usage{
-get_links(website, start_website, page_ex, links_xpath, case, n)
+get_links(website, start_website, page_ex, links_xpath, case, n, time_out = 1)
 }
 \arguments{
 \item{website}{The target website with the links to the desired content.}
@@ -19,12 +19,14 @@ Typically an expression such as "page/30" at the end of the link.}
 \item{case}{The name of the case, e.g. a country, make it a unique case identifier.}
 
 \item{n}{The number of pages on the target website which contains the links of interest.}
+
+\item{time_out}{By default 1 sec, simulates human action and prevents overloading servers (too many requests in too little time)}
 }
 \value{
 A character vector with all links ("all_links)
 }
 \description{
-A function to \emph{automatically collect specific links on a website, e.g. to public speeches on official websites}.
+A function to automatically collect specific links on a website, e.g. to public speeches on official websites.
 }
 \examples{
 #Don't run

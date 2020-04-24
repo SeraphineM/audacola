@@ -2,20 +2,22 @@
 % Please edit documentation in R/get_links_content.R
 \name{get_content}
 \alias{get_content}
-\title{A function to \emph{automatically download content from the Internet} - typically, a link to a public speech provided on offical websites.}
+\title{Automatically collect content stored in specific links.}
 \usage{
-get_content(all_links, case)
+get_content(all_links, case, time_out = 1)
 }
 \arguments{
 \item{all_links}{A character vector which contains all links with the desired content to be downloaded}
 
 \item{case}{The name of the case, e.g. a country, make it a unique case identifier.}
+
+\item{time_out}{By default 1 sec, simulates human action and prevents overloading servers (too many requests in too little time)}
 }
 \value{
 A folder with all htmls scraped from the target website.
 }
 \description{
-A function to \emph{automatically download content from the Internet} - typically, a link to a public speech provided on offical websites.
+A function to automatically download content from the Internet - typically, a link to a public speech provided on offical websites.
 }
 \examples{
 #Don't run
