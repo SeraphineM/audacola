@@ -72,11 +72,53 @@ return(all_links)
 }
 }
 
-#' Automatically collect content stored in specific links.
+#' Automatically collect the page sources of links.
 #'
-#' A function to automatically download content from the Internet - typically, a link to a public speech provided on offical websites.
+#' A function to automatically collect the page sources of links (typically done before the content of the links is downloaded).
 #'
 #' @param all_links A character vector which contains all links with the desired content to be downloaded
+#'
+#' @param case The name of the case, e.g. a country, make it a unique case identifier.
+#'
+#' @param time_out By default 1 sec, simulates human action and prevents overloading servers (too many requests in too little time)
+#'
+#'
+#' @return A character vector with all page sources.
+#'
+#' @import RSelenium
+#'
+#' @export
+#'
+#' @examples
+#' #Don't run
+#' #Get the page sources of links provided on a website
+#' #get_pagesources()
+#'
+get_pagesource <- function(all_links, case, time_out = 1)
+{
+  rD <- rsDriver(port=4567L, browser = "firefox") # runs a firefox (or chrome etc.) browser, wait for necessary files to download
+  remDr <- rD$client
+source <- list()
+# save page source of each link in a list
+for(i in 1:length(all_links)){
+  remDr$navigate(all_links[i])
+  Sys.sleep(time_out)
+  source[i]<-remDr$getPageSource()
+}
+{
+  # again, we use sys.sleep since website is very slow
+  # unlist all page sources
+  pagesource <- unlist(source)
+  return(pagesource)
+  remDr$close()
+}
+}
+
+#' Automatically download content of websites.
+#'
+#' A function to automatically download content of websites via their page source and save them as html in a folder.
+#'
+#' @param pagesource A character vector which contains the page sources of all websites.
 #'
 #' @param case The name of the case, e.g. a country, make it a unique case identifier.
 #'
@@ -93,29 +135,13 @@ return(all_links)
 #' @examples
 #' #Don't run
 #' #Get the contents of links provided on a website
-#' #get_content()
+#' #get_html()
 #'
-get_content <- function(all_links, case, time_out = 1)
-{
-  rD <- rsDriver(port=4567L, browser = "firefox") # runs a firefox (or chrome etc.) browser, wait for necessary files to download
-  remDr <- rD$client
+get_html <- function(pagesource, case){
 # create folder
 dir.create(case)
-speeches <- list()
-# download speeches
-for(i in 1:length(all_links)){
-  remDr$navigate(all_links[i])
-  Sys.sleep(time_out)
-  speeches[i]<-remDr$getPageSource()
-}
-# again, we use sys.sleep since website is very slow
-# unlist all page sources
-speeches <- unlist(speeches)
 # save them as html
-for(i in 1:length(speeches)){
-  write(speeches[i], str_c(str_c(case, "/"), i, ".html"))
-}
-{
-  remDr$close()
+for(i in 1:length(pagesource)){
+  write(pagesource[i], str_c(str_c(case, "/"), i, ".html"))
 }
 }

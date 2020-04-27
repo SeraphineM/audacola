@@ -8,7 +8,8 @@ This package is tailored to collect and analyze public speeches provided on offi
 
 #### Automated data collection: ####
 * `get_links`: A function to automatically collect specific links on a website, e.g. to public speeches on official websites.
-* `get_content`: A function to automatically download content from the Internet - typically, a public speech provided on offical websites.
+* `get_pagesource`: A function to automatically collect the page sources of websites, e.g. of all links to public speeches collected with get_links.
+* `get_html`: A function to automatically download content from the Internet and save it as html in a separate folder - typically, public speeches provided on offical websites for which the page source was already collected (get_pagesource).
 
 #### Automated data analysis: ####
 * `tba`: ...more to come.
