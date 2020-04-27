@@ -78,8 +78,6 @@ return(all_links)
 #'
 #' @param all_links A character vector which contains all links with the desired content to be downloaded
 #'
-#' @param case The name of the case, e.g. a country, make it a unique case identifier.
-#'
 #' @param time_out By default 1 sec, simulates human action and prevents overloading servers (too many requests in too little time)
 #'
 #'
@@ -92,9 +90,9 @@ return(all_links)
 #' @examples
 #' #Don't run
 #' #Get the page sources of links provided on a website
-#' #get_pagesources()
+#' #get_pagesource()
 #'
-get_pagesource <- function(all_links, case, time_out = 1)
+get_pagesource <- function(all_links, time_out = 1)
 {
   rD <- rsDriver(port=4567L, browser = "firefox") # runs a firefox (or chrome etc.) browser, wait for necessary files to download
   remDr <- rD$client
@@ -105,10 +103,10 @@ for(i in 1:length(all_links)){
   Sys.sleep(time_out)
   source[i]<-remDr$getPageSource()
 }
+# again, we use sys.sleep since website is very slow
+# unlist all page sources
+pagesource <- unlist(source)
 {
-  # again, we use sys.sleep since website is very slow
-  # unlist all page sources
-  pagesource <- unlist(source)
   return(pagesource)
   remDr$close()
 }
@@ -121,8 +119,6 @@ for(i in 1:length(all_links)){
 #' @param pagesource A character vector which contains the page sources of all websites.
 #'
 #' @param case The name of the case, e.g. a country, make it a unique case identifier.
-#'
-#' @param time_out By default 1 sec, simulates human action and prevents overloading servers (too many requests in too little time)
 #'
 #'
 #' @return A folder with all htmls scraped from the target website.
