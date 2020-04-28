@@ -11,8 +11,6 @@
 #'
 #' @param links_xpath The general xpath node which contains the links of interest, often similar to "//h2//a".
 #'
-#' @param case The name of the case, e.g. a country, make it a unique case identifier.
-#'
 #' @param n The number of pages on the target website which contains the links of interest.
 #'
 #' @param time_out By default 1 sec, simulates human action and prevents overloading servers (too many requests in too little time)
@@ -33,7 +31,7 @@
 #' #Get the links provided on a website
 #' #get_links()
 #'
-get_links <- function(website, start_website, page_ex, links_xpath, case, n, time_out = 1){
+get_links <- function(website, start_website, page_ex, links_xpath, n, time_out = 1){
 rD <- rsDriver(port=4567L, browser = "firefox") # runs a firefox (or chrome etc.) browser, wait for necessary files to download
 remDr <- rD$client
 # navigate to main website
@@ -66,9 +64,9 @@ for (i in 1:length(page_source)){
 # erase dublicates
 all_links <- unlist(all_links)
 all_links <- unique(all_links)
-return(all_links)
-{
+return(all_links){
   remDr$close()
+  rD$server$stop()
 }
 }
 
@@ -105,8 +103,7 @@ for(i in 1:length(all_links)){
 }
 # again, we use sys.sleep since website is very slow
 # unlist all page sources
-pagesource <- unlist(source)
-{
+pagesource <- unlist(source){
   return(pagesource)
   remDr$close()
 }
