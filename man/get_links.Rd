@@ -4,7 +4,7 @@
 \alias{get_links}
 \title{Automatically collect specific links provided on a website.}
 \usage{
-get_links(website, start_website, page_ex, links_xpath, case, n, time_out = 1)
+get_links(website, start_website, page_ex, links_xpath, n, time_out = 1)
 }
 \arguments{
 \item{website}{The target website with the links to the desired content.}
@@ -15,8 +15,6 @@ get_links(website, start_website, page_ex, links_xpath, case, n, time_out = 1)
 Typically an expression such as "page/30" at the end of the link.}
 
 \item{links_xpath}{The general xpath node which contains the links of interest, often similar to "//h2//a".}
-
-\item{case}{The name of the case, e.g. a country, make it a unique case identifier.}
 
 \item{n}{The number of pages on the target website which contains the links of interest.}
 

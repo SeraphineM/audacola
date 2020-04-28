@@ -64,7 +64,8 @@ for (i in 1:length(page_source)){
 # erase dublicates
 all_links <- unlist(all_links)
 all_links <- unique(all_links)
-return(all_links){
+return(all_links)
+{
   remDr$close()
   rD$server$stop()
 }
@@ -103,7 +104,8 @@ for(i in 1:length(all_links)){
 }
 # again, we use sys.sleep since website is very slow
 # unlist all page sources
-pagesource <- unlist(source){
+pagesource <- unlist(source)
+{
   return(pagesource)
   remDr$close()
 }
