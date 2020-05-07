@@ -81,7 +81,7 @@ get_text <- function(loc_html,
   docvars(speech_corpus, "language") <- language
 
   n <- 1
-  for(i in 1:length(list.files(loc_html))){
+  for(i in 2:length(list.files(loc_html))){
     tmp <- readLines(str_c(loc_html, i, ".html"))
     tmp <- str_c(tmp, collapse = " ")
     tmp <- XML::htmlParse(tmp)
