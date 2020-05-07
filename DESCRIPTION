@@ -5,12 +5,16 @@ Version: 0.1.0
 Author: "Seraphine","Maerz", email="seraphine.maerz@v-dem.net", role = c("aut", "cre")
 Maintainer: The package maintainer <seraphine.maerz@v-dem.net>
 Description: This package provides several function which help to automatically collect and analyze (textual) data from the Internet. 
-Imports: 
+Depends: 
   rvest,
   xml2,
+  XML
+Imports:
   stringr,
   dplyr,
-  RSelenium
+  RSelenium,
+  quanteda,
+  textcat
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

@@ -4,7 +4,15 @@
 \alias{get_links}
 \title{Automatically collect specific links provided on a website.}
 \usage{
-get_links(website, start_website, page_ex, links_xpath, n, time_out = 1)
+get_links(
+  website,
+  start_website,
+  page_ex,
+  links_xpath,
+  first,
+  last,
+  time_out = 1
+)
 }
 \arguments{
 \item{website}{The target website with the links to the desired content.}
@@ -16,12 +24,16 @@ Typically an expression such as "page/30" at the end of the link.}
 
 \item{links_xpath}{The general xpath node which contains the links of interest, often similar to "//h2//a".}
 
-\item{n}{The number of pages on the target website which contains the links of interest.}
+\item{first}{The page counter on the first page (typically a 1, occasionally also a 0 or other).}
+
+\item{last}{The page counter on the last page of the target website which contains the links of interest.}
 
 \item{time_out}{By default 1 sec, simulates human action and prevents overloading servers (too many requests in too little time)}
 }
 \value{
-A character vector with all links ("all_links)
+A character vector with all links ("all_links). Please NOTE that this collection of links might
+need to be further filtered (depending on how well the links_xpath was designed) and/or completed, e.g. with str_c(start_website, all_links),
+since often, the links miss the first part, e.g. the main address (start_website) of the homepage.
 }
 \description{
 A function to automatically collect specific links on a website, e.g. to public speeches on official websites.

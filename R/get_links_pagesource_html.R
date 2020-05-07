@@ -11,12 +11,16 @@
 #'
 #' @param links_xpath The general xpath node which contains the links of interest, often similar to "//h2//a".
 #'
-#' @param n The number of pages on the target website which contains the links of interest.
+#' @param first The page counter on the first page (typically a 1, occasionally also a 0 or other).
+#'
+#' @param last The page counter on the last page of the target website which contains the links of interest.
 #'
 #' @param time_out By default 1 sec, simulates human action and prevents overloading servers (too many requests in too little time)
 #'
 #'
-#' @return A character vector with all links ("all_links)
+#' @return A character vector with all links ("all_links). Please NOTE that this collection of links might
+#' need to be further filtered (depending on how well the links_xpath was designed) and/or completed, e.g. with str_c(start_website, all_links),
+#' since often, the links miss the first part, e.g. the main address (start_website) of the homepage.
 #'
 #' @import RSelenium
 #' @import rvest
@@ -31,7 +35,7 @@
 #' #Get the links provided on a website
 #' #get_links()
 #'
-get_links <- function(website, start_website, page_ex, links_xpath, n, time_out = 1){
+get_links <- function(website, start_website, page_ex, links_xpath, first, last, time_out = 1){
 rD <- rsDriver(port=4567L, browser = "firefox") # runs a firefox (or chrome etc.) browser, wait for necessary files to download
 remDr <- rD$client
 # navigate to main website
@@ -40,8 +44,8 @@ Sys.sleep(time_out)
 # all htmls (page_sources) should be collected in a list
 page_source <- list()
 # write loop to get page_sources of all pages in a large list (check how many pages)
-for (i in 1:n){
-  page <- paste0("", seq(1:n), "")
+for (i in 1:last){
+  page <- paste0("", seq.int(first,last), "")
   website_page <- str_c(website, page_ex)
   path <- sprintf(website_page, page)
   remDr$navigate(path[i])
@@ -49,6 +53,10 @@ for (i in 1:n){
   remDr$navigate(start_website)
   Sys.sleep(time_out)
 }
+remDr$close()
+rD$server$stop()
+rm(rD)
+gc()
 # use sys.sleep if website is loading very slowly
 # another loop to save in a list all links to speeches contained in the already scraped page_sources
 link <- list()
@@ -66,8 +74,7 @@ all_links <- unlist(all_links)
 all_links <- unique(all_links)
 return(all_links)
 {
-  remDr$close()
-  rD$server$stop()
+
 }
 }
 
@@ -102,12 +109,15 @@ for(i in 1:length(all_links)){
   Sys.sleep(time_out)
   source[i]<-remDr$getPageSource()
 }
+remDr$close()
+rD$server$stop()
+rm(rD)
+gc()
 # again, we use sys.sleep since website is very slow
 # unlist all page sources
 pagesource <- unlist(source)
 {
   return(pagesource)
-  remDr$close()
 }
 }
 

@@ -1,0 +1,10 @@
+citHeader("To cite the audacola R package in publications use:")
+
+citEntry(
+  entry    = "misc",
+  title    = "{Audacola - An R package to assist with AUtomated DAta COLection and Analysis.}",
+  author   = as.person("Seraphine F. Maerz"),
+  year     = 2020,
+  url      = "https://github.com/SeraphineM/audacola",
+  textVersion = paste("Seraphine Maerz. Audacola - 'An R package to assist with AUtomated DAta COLection and Analysis.' 2020. github.com/SeraphineM/audacola")
+)
