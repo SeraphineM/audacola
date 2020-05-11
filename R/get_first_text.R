@@ -100,10 +100,10 @@ get_text <- function(loc_html,
       docvars(tmp_corpus, "date") <- date
       docvars(tmp_corpus, "speaker") <- speaker
       docvars(tmp_corpus, "country") <- country
-      docvars(speech_corpus, "country_id") <- country_id
-      docvars(speech_corpus, "regime") <- regime
-      docvars(speech_corpus, "source") <- source
-      docvars(speech_corpus, "language") <- language
+      docvars(tmp_corpus, "country_id") <- country_id
+      docvars(tmp_corpus, "regime") <- regime
+      docvars(tmp_corpus, "source") <- source
+      docvars(tmp_corpus, "language") <- language
       speech_corpus <- c(tmp_corpus, speech_corpus)
     }
   }
