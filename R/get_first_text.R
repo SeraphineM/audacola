@@ -179,7 +179,7 @@ get_first <- function(loc_html,
   title <- XML::xpathSApply(tmp, x_title, XML::xmlValue)
   date <- XML::xpathSApply(tmp, x_date, XML::xmlValue)
   # build a quanteda corpus with meta data
-  speech_corpus <- corpus(speech)
+  speech_corpus <- corpus(speech, docname = 1)
   docvars(speech_corpus, "title") <- title
   docvars(speech_corpus, "date") <- date
   docvars(speech_corpus, "speaker") <- speaker
