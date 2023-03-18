@@ -43,6 +43,7 @@ remDr$navigate(website)
 Sys.sleep(time_out)
 # all htmls (page_sources) should be collected in a list
 page_source <- list()
+path <- list()
 # write loop to get page_sources of all pages in a large list (check how many pages)
 for (i in 1:last){
   page <- paste0("", seq.int(first,last), "")
