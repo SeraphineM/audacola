@@ -47,7 +47,7 @@ page_source <- list()
 for (i in 1:last){
   page <- paste0("", seq.int(first,last), "")
   website_page <- str_c(website, page_ex)
-  path <- sprintf(website_page, page)
+  path <- str_c(website_page, page)
   remDr$navigate(path[i])
   page_source[i]<-remDr$getPageSource()
   remDr$navigate(start_website)
